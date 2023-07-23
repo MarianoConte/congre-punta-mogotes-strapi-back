@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "departamentos",
+  "info": {
+    "singularName": "departamento",
+    "pluralName": "departamentos",
+    "displayName": "Departamento"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Departamento": {
+      "type": "string"
+    },
+    "UltimaVisita": {
+      "type": "datetime"
+    },
+    "edificio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::edificio.edificio"
+    }
+  }
+}

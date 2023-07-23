@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "edificios",
+  "info": {
+    "singularName": "edificio",
+    "pluralName": "edificios",
+    "displayName": "Edificio",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Direccion": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "Latitud": {
+      "type": "float",
+      "max": 90,
+      "min": -90
+    },
+    "Longitud": {
+      "type": "float",
+      "max": 180,
+      "min": -180
+    },
+    "Notas": {
+      "type": "richtext"
+    },
+    "territorio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::territorio.territorio"
+    }
+  }
+}
