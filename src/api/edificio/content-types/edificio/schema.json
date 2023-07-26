@@ -34,6 +34,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::territorio.territorio"
+    },
+    "Numero": {
+      "type": "string"
     }
   }
 }
