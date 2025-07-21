@@ -7,9 +7,11 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "postinstall": "strapi build"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.7.10",
     "@types/pg": "^8.10.2"
   },
   "dependencies": {
@@ -17,7 +19,8 @@
     "@strapi/plugin-users-permissions": "4.11.7",
     "@strapi/strapi": "4.11.7",
     "better-sqlite3": "8.0.1",
-    "pg": "^8.11.1"
+    "pg": "^8.11.1",
+    "pg-connection-string": "^2.6.4"
   },
   "author": {
     "name": "A Strapi developer"

@@ -1,4 +1,65 @@
-# 🚀 Getting started with Strapi
+# Congre La Perla - Strapi Backend
+
+API backend para la aplicación de gestión de territorios de la congregación La Perla.
+
+## 🚀 Deploy a Railway
+
+### Preparación previa
+
+1. Asegúrate de tener una cuenta en [Railway](https://railway.app)
+2. Instala Railway CLI: `npm install -g @railway/cli`
+3. Ten listos los valores para las variables de entorno
+
+### Variables de entorno requeridas en Railway
+
+```env
+NODE_ENV=production
+HOST=0.0.0.0
+PORT=$PORT
+APP_KEYS=genera,claves,seguras,aqui
+API_TOKEN_SALT=genera_un_salt_seguro
+ADMIN_JWT_SECRET=genera_un_jwt_secret_seguro  
+JWT_SECRET=genera_un_jwt_secret_seguro
+TRANSFER_TOKEN_SALT=genera_un_transfer_salt_seguro
+DATABASE_URL=$DATABASE_URL
+DATABASE_SSL=false
+```
+
+### Pasos para el deploy
+
+1. **Conectar repositorio a Railway:**
+   - Ve a [Railway Dashboard](https://railway.app/dashboard)
+   - Haz clic en "New Project"
+   - Selecciona "Deploy from GitHub repo"
+   - Conecta este repositorio
+
+2. **Agregar base de datos PostgreSQL:**
+   - En tu proyecto de Railway, haz clic en "Add Service"
+   - Selecciona "Database" → "PostgreSQL"
+   - Railway automáticamente creará la variable `DATABASE_URL`
+
+3. **Configurar variables de entorno:**
+   - Ve a la pestaña "Variables" de tu servicio
+   - Agrega todas las variables listadas arriba
+   - Genera valores seguros para las claves secretas
+
+4. **Deploy automático:**
+   - Railway detectará automáticamente tu aplicación Node.js
+   - El deploy se ejecutará automáticamente
+
+### Generar claves seguras
+
+Para generar claves seguras, puedes usar:
+
+```bash
+# Para APP_KEYS (4 claves separadas por comas)
+node -e "console.log(require('crypto').randomBytes(64).toString('base64'))"
+
+# Para los demás secrets
+node -e "console.log(require('crypto').randomBytes(64).toString('base64'))"
+```
+
+## 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
 
