@@ -4,7 +4,8 @@
   "info": {
     "singularName": "territorio",
     "pluralName": "territorios",
-    "displayName": "Territorio"
+    "displayName": "Territorio",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "no_visitars",
+  "info": {
+    "singularName": "no-visitar",
+    "pluralName": "no-visitars",
+    "displayName": "No visitar",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "direccion": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "territorio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::territorio.territorio"
+    }
+  }
+}
