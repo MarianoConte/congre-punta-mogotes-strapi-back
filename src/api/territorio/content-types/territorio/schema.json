@@ -20,6 +20,21 @@
     },
     "Notas": {
       "type": "text"
+    },
+    "Manzanas": {
+      "type": "json"
+    },
+    "Foto": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "salidas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::salida.salida",
+      "mappedBy": "territorio"
     }
   }
 }

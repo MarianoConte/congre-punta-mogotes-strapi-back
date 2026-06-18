@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "salidas",
+  "info": {
+    "singularName": "salida",
+    "pluralName": "salidas",
+    "displayName": "Salida"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Fecha": {
+      "type": "datetime",
+      "required": true
+    },
+    "Conductor": {
+      "type": "string",
+      "required": true
+    },
+    "Manzanas": {
+      "type": "json"
+    },
+    "NoVisitarNuevos": {
+      "type": "json"
+    },
+    "territorio": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::territorio.territorio",
+      "inversedBy": "salidas"
+    }
+  }
+}
