@@ -14,8 +14,7 @@
   "attributes": {
     "direccion": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
     },
     "territorio": {
       "type": "relation",
