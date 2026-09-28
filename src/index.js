@@ -25,6 +25,7 @@ const authenticatedActions = [
   'api::salida.salida.find',
   'api::salida.salida.findOne',
   'api::salida.salida.create',
+  'api::salida.salida.delete',
   'api::no-visitar.no-visitar.create',
 ];
 
