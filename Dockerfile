@@ -1,5 +1,5 @@
 # Dockerfile
-FROM node:18-bullseye-slim
+FROM node:18-bookworm-slim
 # Installing libvips-dev for sharp compatibility
 RUN apt-get update && apt-get install -y libvips-dev && rm -rf /var/lib/apt/lists/*
 # Set environment to production
