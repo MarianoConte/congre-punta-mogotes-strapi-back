@@ -80,8 +80,11 @@ $RECYCLE.BIN/
 ssl
 .idea
 nbproject
-public/uploads/*
-!public/uploads/.gitkeep
+# Las imagenes de los territorios se versionan a proposito: Railway recrea el
+# contenedor en cada deploy, asi que si no viajan dentro de la imagen Docker se
+# pierden y la app queda con fotos rotas (los registros sobreviven en Postgres).
+# public/uploads/*
+# !public/uploads/.gitkeep
 
 ############################
 # Node.js
