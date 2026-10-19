@@ -1,0 +1,22 @@
+# Despliega la congregación Este en Fly.io en cada push a main.
+# Punta Mogotes se despliega aparte (Railway escucha el mismo push).
+# See https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/
+
+name: Fly Deploy (Este)
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy congre-este-strapi-back
+    runs-on: ubuntu-latest
+    concurrency: deploy-este
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy -c fly.este.toml --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_ESTE }}

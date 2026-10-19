@@ -18,4 +18,5 @@ RUN npm run build
 # Expose the Strapi port
 EXPOSE 1337
 # Start the Strapi application
-CMD ["npm", "start"]
+# El provider de uploads falla si la carpeta no existe, y en un volumen nuevo no existe.
+CMD ["sh", "-c", "mkdir -p \"${PUBLIC_DIR:-./public}/uploads\" && exec npm start"]

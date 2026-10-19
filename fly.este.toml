@@ -1,0 +1,35 @@
+# Congregación Este. Se despliega con:
+#   fly deploy -c fly.este.toml --remote-only
+# (o solo, en cada push a main, con .github/workflows/fly-deploy-este.yml)
+#
+# Una sola máquina con un volumen donde viven la base SQLite y las fotos.
+# Punta Mogotes NO usa este archivo: corre en Railway con Postgres.
+
+app = 'congre-este-strapi-back'
+primary_region = 'gru'
+
+[build]
+
+[env]
+  DATABASE_CLIENT = 'sqlite'
+  # Relativo a la raíz de la app (/opt/app); queda dentro del volumen y fuera de lo público.
+  DATABASE_FILENAME = 'data/data.db'
+  # Las fotos van a data/public/uploads y se sirven en /uploads/...
+  PUBLIC_DIR = './data/public'
+
+[mounts]
+  source = 'este_data'
+  destination = '/opt/app/data'
+
+[http_service]
+  internal_port = 1337
+  force_https = true
+  auto_stop_machines = 'suspend'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

@@ -66,6 +66,8 @@ $RECYCLE.BIN/
 ############################
 
 .tmp
+# Base SQLite y fotos cuando se corre con DATABASE_FILENAME=data/... y PUBLIC_DIR=./data/public
+data/
 *.log
 *.sql
 *.sqlite
