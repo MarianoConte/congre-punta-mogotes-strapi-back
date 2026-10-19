@@ -10,50 +10,29 @@
  *
  * Uso:
  *   STRAPI_URL=https://congre-este-strapi-back.fly.dev \
- *   STRAPI_TOKEN=<API token> \
- *   node scripts/cargar-territorios.js <carpeta> [--dry-run]
+ *   node scripts/cargar-territorios.js <carpeta> --token-file <archivo> [--dry-run]
  *
  * El token se crea en el admin: Settings → API Tokens → Create new API Token,
- * tipo "Full access". Conviene borrarlo cuando termina la carga.
- *
- * No depende de node_modules: usa fetch/FormData nativos (Node 18 o más).
+ * tipo "Full access". Conviene borrarlo cuando termina la carga. También se
+ * puede pasar con STRAPI_TOKEN o STRAPI_TOKEN_FILE (ver strapi-api.js).
  */
 
 const fs = require('fs');
 const path = require('path');
+const { crearCliente, leerToken, MANZANAS_DEFAULT } = require('./strapi-api');
 
 const TERRITORIO_UID = 'api::territorio.territorio';
-// Las mismas que pone el bootstrap (src/index.js) a los territorios sin manzanas.
-const MANZANAS_DEFAULT = ['A', 'B', 'C', 'D'];
 const TIPOS = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp' };
 
 const [carpeta, ...flags] = process.argv.slice(2);
 const dryRun = flags.includes('--dry-run');
-const baseUrl = (process.env.STRAPI_URL ?? '').replace(/\/+$/, '').replace(/\/api$/, '');
-const token = process.env.STRAPI_TOKEN;
 
-if (!carpeta || !baseUrl || !token) {
-  console.error('Uso: STRAPI_URL=... STRAPI_TOKEN=... node scripts/cargar-territorios.js <carpeta> [--dry-run]');
+if (!carpeta) {
+  console.error('Uso: STRAPI_URL=... node scripts/cargar-territorios.js <carpeta> --token-file <archivo> [--dry-run]');
   process.exit(1);
 }
 
-async function api(metodo, ruta, cuerpo) {
-  const esForm = cuerpo instanceof FormData;
-  const respuesta = await fetch(`${baseUrl}/api${ruta}`, {
-    method: metodo,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      ...(cuerpo && !esForm ? { 'Content-Type': 'application/json' } : {}),
-    },
-    body: cuerpo ? (esForm ? cuerpo : JSON.stringify(cuerpo)) : undefined,
-  });
-
-  if (!respuesta.ok) {
-    const detalle = await respuesta.text();
-    throw new Error(`${metodo} ${ruta} → ${respuesta.status}: ${detalle.slice(0, 300)}`);
-  }
-  return respuesta.json();
-}
+const api = crearCliente({ url: process.env.STRAPI_URL, token: leerToken() });
 
 /** Lee la carpeta y devuelve [{ numero, archivo }] ordenado por número. */
 function leerImagenes(dir) {
